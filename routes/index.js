@@ -20,7 +20,14 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/new', (req, res) => {
-  res.render('form', { title: 'Mini Message App' });
+  res.render('form', { title: 'Add your Message:' });
+});
+
+router.post('/new', function (req, res, next) {
+  const user = req.body.username;
+  const message = req.body.message;
+  messages.push({ text: message, user: user, added: new Date() });
+  res.redirect('/');
 });
 
 module.exports = router;
